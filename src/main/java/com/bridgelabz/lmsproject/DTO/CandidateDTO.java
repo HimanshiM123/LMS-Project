@@ -23,7 +23,7 @@ public class CandidateDTO {
     private String hiredData;
     @NotNull(message = "Degree should not be null")
     private String degree;
-    @Pattern(regexp = "^(\\d+(\\.\\d+)?)%$")
+    @NotNull(message = "Aggregate Percentage Should Not be Null")
     private Double aggrPer;
     @Pattern(regexp = "^[A-Z]{1}[a-zA-Z\\s]{2,}$",message = "Invalid City ..!")
     private String city;
@@ -31,6 +31,7 @@ public class CandidateDTO {
     private String state;
     @NotNull(message = "Preferred Location Should Not be null")
     private String preferredJobLocation;
+    @NotNull(message = "Status Should not be null")
     private String status;
     @NotNull(message = "Pass Out Year Should Not be null")
     private String passOutYear;
