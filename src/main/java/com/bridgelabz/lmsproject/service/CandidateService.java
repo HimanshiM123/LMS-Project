@@ -2,13 +2,16 @@ package com.bridgelabz.lmsproject.service;
 
 import com.bridgelabz.lmsproject.DTO.CandidateDTO;
 import com.bridgelabz.lmsproject.Repository.ICandidateRepository;
+import com.bridgelabz.lmsproject.Repository.ITechStackRepository;
 import com.bridgelabz.lmsproject.exception.AdminException;
 import com.bridgelabz.lmsproject.model.CandidateModel;
+import com.bridgelabz.lmsproject.model.TechStackModel;
 import com.bridgelabz.lmsproject.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,9 +25,20 @@ public class CandidateService implements ICandidateService {
 
     @Autowired
     MailService mailService;
+    @Autowired
+    ITechStackRepository techStackRepository;
     @Override
-    public CandidateModel addCandidate(CandidateDTO candidateDTO) {
+    public CandidateModel addCandidate(CandidateDTO candidateDTO, String token, List<Long> techStackId1) {
+        List<TechStackModel> techStackModels = new ArrayList<>();
+        techStackId1.stream().forEach(techStackId->{
+            Optional<TechStackModel> isTechStackPresent = techStackRepository.findById(techStackId);
+            if (isTechStackPresent.isPresent()){
+                techStackModels.add(isTechStackPresent.get());
+            }
+        });
         CandidateModel candidateModel = new CandidateModel(candidateDTO);
+        if (techStackModels.size() > 0)
+            candidateModel.setTechStackModels(techStackModels);
         candidateModel.setCreationTimeStamp(LocalDateTime.now());
         candidateRepository.save(candidateModel);
         String body = "Candidate added Successfully with id  :" + candidateModel.getId();
@@ -33,11 +47,6 @@ public class CandidateService implements ICandidateService {
         return candidateModel;
     }
 
-    @Override
-    public CandidateModel getCandidateById(long id) {
-        Optional<CandidateModel> candidateModel = candidateRepository.findById(id);
-        return candidateModel.get();
-    }
 
     @Override
     public List<CandidateModel> getAllCandidateData(String token) {

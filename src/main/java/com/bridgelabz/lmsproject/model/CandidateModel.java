@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "Candidate")
@@ -25,7 +26,12 @@ public class CandidateModel {
     private String preferredJobLocation;
     private String status;
     private String passOutYear;
+    @OneToMany
+//    @ElementCollection(fetch = FetchType.LAZY, targetClass = String.class)
+    @CollectionTable(name = "techStackCandidate", joinColumns = @JoinColumn(name = "techStackId"))
+    List<TechStackModel> techStackModels;
     private String candidateStatus;
+
     private LocalDateTime creationTimeStamp;
     private LocalDateTime updatedTimeStamp;
 

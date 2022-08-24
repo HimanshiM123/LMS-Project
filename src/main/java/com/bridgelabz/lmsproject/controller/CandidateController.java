@@ -15,13 +15,8 @@ public class CandidateController {
     ICandidateService candidateService;
 
     @PostMapping(value = "/addCandidate")
-    public CandidateModel addAdminData(@Valid @RequestBody CandidateDTO candidateDTO) {
-        return candidateService.addCandidate(candidateDTO);
-    }
-
-    @GetMapping("/getCandidate/{id}")
-    public CandidateModel getCandidate(@PathVariable long id){
-        return candidateService.getCandidateById(id);
+    public CandidateModel addCandidateData(@Valid @RequestBody CandidateDTO candidateDTO, @RequestHeader String token, @RequestParam List<Long> techStackId1) {
+        return candidateService.addCandidate(candidateDTO, token, techStackId1);
     }
 
     @GetMapping("/getCandidate")

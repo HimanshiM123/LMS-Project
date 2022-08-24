@@ -17,4 +17,5 @@ public interface IMentorService {
     MentorModel updateMentor(long id, MentorDTO mentorDTO, String token);
 
     MentorModel deleteMentor(Long id, String token);
+
 }

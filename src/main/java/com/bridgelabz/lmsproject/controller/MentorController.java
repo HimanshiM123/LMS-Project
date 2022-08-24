@@ -1,8 +1,6 @@
 package com.bridgelabz.lmsproject.controller;
 
-import com.bridgelabz.lmsproject.DTO.AdminDTO;
 import com.bridgelabz.lmsproject.DTO.MentorDTO;
-import com.bridgelabz.lmsproject.model.AdminModel;
 import com.bridgelabz.lmsproject.model.MentorModel;
 import com.bridgelabz.lmsproject.service.IMentorService;
 import org.springframework.beans.factory.annotation.Autowired;

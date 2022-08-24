@@ -5,7 +5,6 @@ import com.bridgelabz.lmsproject.model.AdminModel;
 import com.bridgelabz.lmsproject.service.IAdminService;
 import com.bridgelabz.lmsproject.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -30,6 +29,7 @@ public class AdminController {
 
     @GetMapping("/getAdmin/{id}")
     public AdminModel getAdmin(@PathVariable long id){
+
         return adminService.getAdminById(id);
     }
 

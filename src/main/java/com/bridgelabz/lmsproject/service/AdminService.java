@@ -29,11 +29,11 @@ public class AdminService implements IAdminService{
 
     @Override
     public AdminModel addAdmin(AdminDTO adminDTO) {
-        AdminModel adminModel = new AdminModel(adminDTO);
+       AdminModel adminModel = new AdminModel(adminDTO);
         adminModel.setCreatorStamp(LocalDateTime.now());
         adminRepository.save(adminModel);
-        String body = "Admin added Successfully with id  :" + adminModel.getId();
-        String subject = "Admin added Successfully....";
+        String body = "Candidate added Successfully with id  :" + adminModel.getId();
+        String subject = "Candidate added Successfully....";
         mailService.send(adminModel.getEmailId(), body, subject);
         return adminModel;
     }
@@ -99,7 +99,7 @@ public class AdminService implements IAdminService{
                 String token = tokenUtil.crateToken(isEmailPresent.get().getId());
                 return new Response("Login successful", 200, token);
             }
-            throw new AdminException(400, "Invalid Credental");
+            throw new AdminException(400, "Invalid Credential");
         }
         throw new AdminException(400, "Admin Not Found");
     }
@@ -117,8 +117,8 @@ public class AdminService implements IAdminService{
     }
 
     @Override
-    public AdminModel resetPassword(String emailId) {
-        Optional<AdminModel> isEmailPresent = adminRepository.findAdminByEmailId(emailId);
+    public AdminModel resetPassword(String email) {
+        Optional<AdminModel> isEmailPresent = adminRepository.findAdminByEmailId(email);
         if (isEmailPresent.isPresent()){
             String token = tokenUtil.crateToken(isEmailPresent.get().getId());
             String url = "http://localhost:8082/admin/resetPassword" + token;

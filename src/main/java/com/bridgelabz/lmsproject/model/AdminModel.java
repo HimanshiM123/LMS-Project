@@ -1,14 +1,12 @@
 package com.bridgelabz.lmsproject.model;
 
 import com.bridgelabz.lmsproject.DTO.AdminDTO;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import sun.security.util.Password;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 @Entity
-@Table(name = "Admin")
+@Table(name = "admin")
 @Data
 public class AdminModel {
     @Id
@@ -21,7 +19,6 @@ public class AdminModel {
     private String profilePath;
     private boolean status;
     private String password;
-
     private LocalDateTime creatorStamp;
     private LocalDateTime updatedStamp;
 

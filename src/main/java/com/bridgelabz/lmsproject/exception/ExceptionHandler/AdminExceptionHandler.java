@@ -23,6 +23,6 @@ public class AdminExceptionHandler {
         Response response = new Response();
         response.setErrorCode(400);
         response.setMessage(e.getMessage());
-        return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

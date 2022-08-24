@@ -4,6 +4,8 @@ import com.bridgelabz.lmsproject.DTO.AdminDTO;
 import com.bridgelabz.lmsproject.model.AdminModel;
 import com.bridgelabz.lmsproject.util.Response;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.List;
 
@@ -25,5 +27,5 @@ public interface IAdminService {
 
     AdminModel updatePassword(String token, String newPassword);
 
-    AdminModel resetPassword(String emailId);
+    AdminModel resetPassword(String email);
 }

@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public interface ICandidateService {
-    CandidateModel addCandidate(CandidateDTO candidateDTO);
-
-    CandidateModel getCandidateById(long id);
+    CandidateModel addCandidate(CandidateDTO candidateDTO, String token, List<Long> techStackId1);
 
     List<CandidateModel> getAllCandidateData(String token);
 
@@ -22,4 +20,6 @@ public interface ICandidateService {
     CandidateModel changeCandidateStatus(long id, String status, String token);
 
     List<CandidateModel> getStatusCount(String status);
+
+
 }

@@ -3,7 +3,6 @@ package com.bridgelabz.lmsproject.service;
 import com.bridgelabz.lmsproject.DTO.MentorDTO;
 import com.bridgelabz.lmsproject.Repository.IMentorRepository;
 import com.bridgelabz.lmsproject.exception.AdminException;
-import com.bridgelabz.lmsproject.model.AdminModel;
 import com.bridgelabz.lmsproject.model.MentorModel;
 import com.bridgelabz.lmsproject.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
