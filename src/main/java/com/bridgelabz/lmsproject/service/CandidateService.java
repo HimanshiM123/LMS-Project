@@ -6,6 +6,8 @@ import com.bridgelabz.lmsproject.Repository.ITechStackRepository;
 import com.bridgelabz.lmsproject.exception.AdminException;
 import com.bridgelabz.lmsproject.model.CandidateModel;
 import com.bridgelabz.lmsproject.model.TechStackModel;
+import com.bridgelabz.lmsproject.util.Email;
+import com.bridgelabz.lmsproject.util.MessageProducer;
 import com.bridgelabz.lmsproject.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,10 @@ public class CandidateService implements ICandidateService {
     MailService mailService;
     @Autowired
     ITechStackRepository techStackRepository;
+    @Autowired
+    Email email;
+    @Autowired
+    MessageProducer messageproducer;
     @Override
     public CandidateModel addCandidate(CandidateDTO candidateDTO, String token, List<Long> techStackId1) {
         List<TechStackModel> techStackModels = new ArrayList<>();
@@ -41,9 +47,14 @@ public class CandidateService implements ICandidateService {
             candidateModel.setTechStackModels(techStackModels);
         candidateModel.setCreationTimeStamp(LocalDateTime.now());
         candidateRepository.save(candidateModel);
-        String body = "Candidate added Successfully with id  :" + candidateModel.getId();
-        String subject = "Candidate added Successfully....";
-        mailService.send(candidateModel.getEmail(), body, subject);
+       email.setTo(candidateModel.getEmail());
+       email.setFrom("himanshi@gmail.com");
+       email.setSubject("Message sent....");
+       email.setBody("Message Sent to email");
+       messageproducer.sendMessage(email);
+//        String body = "Candidate added Successfully with id  :" + candidateModel.getId();
+//        String subject = "Candidate added Successfully....";
+//        mailService.send(candidateModel.getEmail(), body, subject);
         return candidateModel;
     }
 

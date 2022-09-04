@@ -80,7 +80,6 @@ public class MentorService implements IMentorService{
         }
         throw  new AdminException(400, "Mentor not Present");
     }
-
     @Override
     public MentorModel deleteMentor(Long id, String token) {
         Long mentorId = tokenUtil.decodeToken(token);
